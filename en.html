@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="A public Japan-market customer analytics and data governance case study with APAC relevance.">
+<title>Japan APAC Customer Analytics — Case Study</title>
+<link rel="stylesheet" href="assets/case-study.css">
+<link rel="stylesheet" href="assets/font-overrides.css">
+</head>
+<body>
+<header class="topbar">
+<div class="wrap">
+<a class="brand" href="#top">CASE STUDY / 2026</a>
+<nav class="lang" aria-label="Language">
+<a href="index.html">日本語</a>
+<a href="zh.html">中文</a>
+<a aria-current="page" href="en.html">EN</a>
+</nav>
+</div>
+</header>
+<main id="top">
+<section class="hero">
+<div class="wrap hero-grid">
+<div>
+<div class="eyebrow">Customer analytics · data governance · lifecycle measurement</div>
+<h1>Definitions that make customer lifecycle analysis usable.</h1>
+<p class="lead">Counting orders is easy. Producing comparable measures of first purchase, repeat purchase, and customer volume is harder. This case study shows the analytical decisions required around grain, identity, observation windows, and exceptions.</p>
+<div class="notice">
+<strong>About this public edition</strong>
+<br>It contains no company names, customer records, or order records. The headline metrics below are rounded and anonymized results, not incremental sales or profit claims. Currency uses an approximate display-date conversion.</div><div class="metric-strip"><div><b>US$600K+</b><span>Completed-order GMV in the analysis window<br>Approx. JPY 100M+</span></div><div><b>50x+</b><span>Growth in monthly F1 customers</span></div><div><b>15%+</b><span>F2 average-order-value premium</span></div></div>
+</div>
+<aside class="hero-side">
+<span class="tag">Focus</span>
+<strong>Set the measurement rule before presenting the result.</strong>
+<p>Customer identity · Order grain · Lifecycle definition · QA controls</p>
+</aside>
+</div>
+</section>
+<section class="section">
+<div class="wrap">
+<div class="kicker">01 / Business problem</div>
+<h2>The source can be reportable without producing a comparable customer metric.</h2>
+<div class="three-col">
+<article class="card">
+<div class="number">01</div>
+<h3>Line items and orders are mixed</h3>
+<p>An order with several product lines can be double counted when order value is summed at line-item level.</p>
+</article>
+<article class="card">
+<div class="number">02</div>
+<h3>Identity breaks across journeys</h3>
+<p>Guest checkout, account creation, and email variation can turn one person into several analytical customers.</p>
+</article>
+<article class="card">
+<div class="number">03</div>
+<h3>Operational exceptions distort signals</h3>
+<p>Cancellations, internal use, benefits, and delivery rules should not be interpreted as ordinary customer behavior.</p>
+</article>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="wrap">
+<div class="kicker">02 / Analytical definitions</div>
+<h2>F1 and F2 are definitions, not labels.</h2>
+<p class="section-intro">F1 means the first completed order within the observation window. F2 means a later completed order from the same resolved customer. Neither measure claims to identify a customer's first-ever purchase.</p>
+<div class="table-wrap">
+<table class="comparison">
+<thead>
+<tr>
+<th>Question</th>
+<th>Weak treatment</th>
+<th>Defined treatment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First purchase</td>
+<td>Call it “new” without full history</td>
+<td>Name it first purchase within the observation window</td>
+</tr>
+<tr>
+<td>F1 / F2 customer counts</td>
+<td>Add overlapping customers together</td>
+<td>Recalculate total customers with a unique identity key</td>
+</tr>
+<tr>
+<td>Cancelled orders</td>
+<td>Classify them as F1 or F2 purchases</td>
+<td>Separate them from completed-order lifecycle measurement</td>
+</tr>
+<tr>
+<td>Repeat-customer value</td>
+<td>Call total customer-group value F2 revenue</td>
+<td>Keep order-level F2 and customer-group contribution separate</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="wrap">
+<div class="kicker">03 / Data governance</div>
+<h2>A controlled path from source data to an interpretable result.</h2>
+<div class="flow">
+<div>
+<span class="tag">01</span>
+<b>Inspect source data</b>
+<span>Confirm grain, statuses, required fields, and the observation period.</span>
+</div>
+<div>
+<span class="tag">02</span>
+<b>Normalize to order level</b>
+<span>Use a representative order record for order value and status.</span>
+</div>
+<div>
+<span class="tag">03</span>
+<b>Resolve identity</b>
+<span>Connect account and guest evidence into a documented analytical key.</span>
+</div>
+<div>
+<span class="tag">04</span>
+<b>Assign lifecycle stage</b>
+<span>Sequence completed orders and assign F1 or F2.</span>
+</div>
+<div>
+<span class="tag">05</span>
+<b>Reconcile and explain</b>
+<span>Test totals and retain exceptions, limits, and naming rules.</span>
+</div>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="wrap">
+<div class="kicker">04 / Synthetic example</div>
+<h2>A comparison designed to prevent the wrong conclusion.</h2>
+<div class="two-col">
+<div class="synthetic">
+<strong>Synthetic illustration</strong>
+<br>If a month contains 120 F1 customers and 18 F2 customers, but six people placed both their first and repeat orders in that month, the unique-customer count is 132, not 138. The correct denominator depends on the question being asked.</div>
+<div class="card">
+<h3>Reporting discipline</h3>
+<p>“Revenue from repeat customers” and “F2-order revenue” are different measures. The former may include those customers’ first orders or cancelled orders. The metric name must match its calculation.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="section"><div class="wrap"><div class="kicker">05 / Visual evidence</div><h2>A definition changes the number you see.</h2><div class="evidence-grid"><article class="evidence-card"><h3>Order-grain reconciliation</h3><p class="micro">Synthetic illustration: a line-item total is not an order-level total.</p><div class="bar-set"><div class="bar-row"><span>Line-item sum</span><div class="bar-track"><div class="bar-fill warn" style="width:92%"></div></div><b>920</b></div><div class="bar-row"><span>Order-level sum</span><div class="bar-track"><div class="bar-fill" style="width:68%"></div></div><b>680</b></div><div class="bar-row"><span>Duplication risk</span><div class="bar-track"><div class="bar-fill alt" style="width:24%"></div></div><b>240</b></div></div><div class="callout">Take order value and status from one representative order record.</div></article><article class="evidence-card"><h3>Identity resolution</h3><p class="micro">Member ID alone can split a customer journey in two.</p><div class="identity-map"><div class="identity-node"><strong>Guest purchase</strong><span>Email and order evidence</span></div><div class="identity-arrow">→</div><div class="identity-node"><strong>Analytical key</strong><span>Documented linkage</span></div><div class="identity-arrow">→</div><div class="identity-node"><strong>Member purchase</strong><span>Account and order evidence</span></div></div><div class="callout">Do not force uncertain records together. Retain exceptions so the analysis remains reproducible.</div></article></div><div class="metric-strip"><div><b>F1</b><span>First completed order in the observation window</span></div><div><b>F2</b><span>Later completed orders from the same customer</span></div><div><b>QA</b><span>Definitions, overlap, and totals reconciled each run</span></div></div></div></section>
+<section class="section">
+<div class="wrap">
+<div class="kicker">06 / Operational value</div>
+<h2>Higher-quality analysis supports the next operational decision.</h2>
+<div class="three-col">
+<article class="card">
+<h3>CRM audience design</h3>
+<p>A stable customer key makes eligibility for member and repeat-purchase activity more consistent.</p>
+</article>
+<article class="card">
+<h3>Exception management</h3>
+<p>Separating unusual transactions from normal demand prevents operational rules from becoming false customer insights.</p>
+</article>
+<article class="card">
+<h3>Explainable reporting</h3>
+<p>Definitions, limits, and reconciliation checks let future teams reproduce the same interpretation.</p>
+</article>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="wrap">
+<div class="ownership">
+<div class="kicker" style="color:#d8e861">06 / Ownership</div>
+<h2>Building the measurement rules and operating foundation behind the analysis.</h2>
+<div class="three-col">
+<article class="card">
+<h3>Insight Ownership</h3>
+<p>Defined disconnected order and customer records as a measurement problem, then separated lifecycle, customer-group, and completed-order measures.</p>
+</article>
+<article class="card">
+<h3>Execution Ownership</h3>
+<p>Built the end-to-end analysis process: source review, grain design, identity rules, exception classification, QA checks, and reporting definitions.</p>
+</article>
+<article class="card">
+<h3>Ownership Boundaries</h3>
+<p>This public edition contains methodology and synthetic examples only. Production records, operating rules, company details, and actual outcomes remain private.</p>
+</article>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="footer">
+<div class="wrap">
+<span>Customer Analytics & Data Governance — Public Case Study</span>
+<span>All examples are synthetic and anonymized.</span>
+</div>
+</footer>
+</body>
+</html>

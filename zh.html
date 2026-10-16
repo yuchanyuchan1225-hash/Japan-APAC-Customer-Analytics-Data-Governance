@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="以日本市场为起点的 APAC 客户分析与数据治理公开案例。">
+<title>日本市场 APAC 客户分析｜案例</title>
+<link rel="stylesheet" href="assets/case-study.css">
+<link rel="stylesheet" href="assets/font-overrides.css">
+</head>
+<body>
+<header class="topbar">
+<div class="wrap">
+<a class="brand" href="#top">CASE STUDY / 2026</a>
+<nav class="lang" aria-label="Language">
+<a href="index.html">日本語</a>
+<a aria-current="page" href="zh.html">中文</a>
+<a href="en.html">EN</a>
+</nav>
+</div>
+</header>
+<main id="top">
+<section class="hero">
+<div class="wrap hero-grid">
+<div>
+<div class="eyebrow">Customer analytics · data governance · lifecycle measurement</div>
+<h1>让顾客生命周期分析，经得起业务决策的检验。</h1>
+<p class="lead">会汇总订单，不等于能正确解释首购、复购和顾客数。本案例展示如何先处理数据粒度、身份识别、观察期间与业务例外，再得到可用于运营的顾客指标。</p>
+<div class="notice">
+<strong>公开版本说明</strong>
+<br>本页不包含真实企业名称、顾客信息或订单信息。以下核心指标为真实结果经取整与脱敏后的区间值，不代表增量销售或利润。货币按展示时近似汇率换算。</div><div class="metric-strip"><div><b>RMB 4M+</b><span>分析期内已完成订单 GMV<br>约合 JPY 100M+</span></div><div><b>50x+</b><span>月度 F1 顾客规模增长</span></div><div><b>15%+</b><span>F2 平均订单金额溢价</span></div></div>
+</div>
+<aside class="hero-side">
+<span class="tag">Focus</span>
+<strong>先确定“数什么”，再解释结果。</strong>
+<p>Customer identity · Order grain · Lifecycle definition · QA controls</p>
+</aside>
+</div>
+</section>
+<section class="section">
+<div class="wrap">
+<div class="kicker">01 / Business problem</div>
+<h2>可以出报表，不代表顾客指标可以比较。</h2>
+<div class="three-col">
+<article class="card">
+<div class="number">01</div>
+<h3>商品行与订单行混在一起</h3>
+<p>一个订单包含多件商品时，若直接在商品行层面汇总订单金额，就可能产生重复计数。</p>
+</article>
+<article class="card">
+<div class="number">02</div>
+<h3>顾客身份在旅程中断裂</h3>
+<p>游客下单、注册会员和邮箱写法差异，可能让同一个人变成多个分析对象。</p>
+</article>
+<article class="card">
+<div class="number">03</div>
+<h3>业务例外被误当作消费行为</h3>
+<p>取消订单、内部使用、赠品和配送规则若不单独处理，会扭曲对正常顾客行为的判断。</p>
+</article>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="wrap">
+<div class="kicker">02 / Analytical definitions</div>
+<h2>F1 与 F2 不是标签，而是经过限定的定义。</h2>
+<p class="section-intro">F1 指观察期内第一笔已完成订单，F2 指同一位已识别顾客的第二笔及以后已完成订单。它不等同于顾客一生中的第一次购买。</p>
+<div class="table-wrap">
+<table class="comparison">
+<thead>
+<tr>
+<th>问题</th>
+<th>模糊处理</th>
+<th>本案例采用的处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>首购</td>
+<td>没有完整历史也称为“新客”</td>
+<td>明确写为“观察期内首次购买”</td>
+</tr>
+<tr>
+<td>F1 / F2 顾客数</td>
+<td>将两类顾客直接相加</td>
+<td>总顾客数按唯一身份键重新去重</td>
+</tr>
+<tr>
+<td>取消订单</td>
+<td>作为 F1 或 F2 购买次数</td>
+<td>与已完成订单分开，必要时作为独立运营指标</td>
+</tr>
+<tr>
+<td>复购顾客贡献</td>
+<td>把顾客群总销售额叫作 F2 销售额</td>
+<td>订单级 F2 与顾客群贡献使用不同指标</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="wrap">
+<div class="kicker">03 / Data governance</div>
+<h2>先理顺数据路径，再输出可解释的结论。</h2>
+<div class="flow">
+<div>
+<span class="tag">01</span>
+<b>检查源数据</b>
+<span>确认记录粒度、订单状态、必要字段和观察期间。</span>
+</div>
+<div>
+<span class="tag">02</span>
+<b>整理到订单粒度</b>
+<span>以订单代表记录管理订单金额和状态，避免重复汇总。</span>
+</div>
+<div>
+<span class="tag">03</span>
+<b>解析顾客身份</b>
+<span>在保留依据的前提下，将会员与游客线索连接为分析用身份键。</span>
+</div>
+<div>
+<span class="tag">04</span>
+<b>赋予生命周期阶段</b>
+<span>只按已完成订单的时间顺序判定 F1 或 F2。</span>
+</div>
+<div>
+<span class="tag">05</span>
+<b>校验并解释</b>
+<span>核对汇总结果，同时保留例外、限制和命名规则。</span>
+</div>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="wrap">
+<div class="kicker">04 / Synthetic example</div>
+<h2>不是为了展示数字，而是为了避免得出错误结论。</h2>
+<div class="two-col">
+<div class="synthetic">
+<strong>合成示例</strong>
+<br>某月有 120 位 F1 顾客和 18 位 F2 顾客，但其中 6 人在同月完成了首购和再次购买。该月唯一顾客数应为 132，而不是 138。分母必须根据具体问题处理重叠。</div>
+<div class="card">
+<h3>报告纪律</h3>
+<p>“复购顾客带来的销售额”和“F2 订单销售额”不是同一指标。前者可能包括该顾客的首购或取消订单。指标名称必须与计算方法一致。</p>
+</div>
+</div>
+</div>
+</section>
+<section class="section"><div class="wrap"><div class="kicker">05 / Visual evidence</div><h2>定义一变，最终看到的数字也会不同。</h2><div class="evidence-grid"><article class="evidence-card"><h3>订单粒度校验</h3><p class="micro">合成示例：商品行汇总与订单代表行汇总不是同一个数字。</p><div class="bar-set"><div class="bar-row"><span>商品行汇总</span><div class="bar-track"><div class="bar-fill warn" style="width:92%"></div></div><b>920</b></div><div class="bar-row"><span>订单代表行</span><div class="bar-track"><div class="bar-fill" style="width:68%"></div></div><b>680</b></div><div class="bar-row"><span>重复风险</span><div class="bar-track"><div class="bar-fill alt" style="width:24%"></div></div><b>240</b></div></div><div class="callout">订单金额与状态只从订单代表行获取。</div></article><article class="evidence-card"><h3>顾客身份连接</h3><p class="micro">如果只依赖会员 ID，购买历史可能在途中被切断。</p><div class="identity-map"><div class="identity-node"><strong>游客购买</strong><span>邮箱与订单线索</span></div><div class="identity-arrow">→</div><div class="identity-node"><strong>分析身份键</strong><span>保留连接依据</span></div><div class="identity-arrow">→</div><div class="identity-node"><strong>会员购买</strong><span>会员 ID 与订单线索</span></div></div><div class="callout">无法证实的情况不强行合并。保留例外才能支持重算。</div></article></div><div class="metric-strip"><div><b>F1</b><span>观察期内首笔已完成订单</span></div><div><b>F2</b><span>同一顾客第二笔及以后已完成订单</span></div><div><b>QA</b><span>每次核对定义、重叠与合计</span></div></div></div></section>
+<section class="section">
+<div class="wrap">
+<div class="kicker">06 / Operational value</div>
+<h2>让分析质量支撑下一步运营判断。</h2>
+<div class="three-col">
+<article class="card">
+<h3>CRM 人群设计</h3>
+<p>稳定的顾客身份基础，让会员运营和复购活动的目标人群定义更可靠。</p>
+</article>
+<article class="card">
+<h3>业务例外管理</h3>
+<p>把特殊交易与正常需求分开，避免把业务规则误解为顾客洞察。</p>
+</article>
+<article class="card">
+<h3>可解释的报告</h3>
+<p>保留定义、限制和校验规则，让更换负责人后仍能回到相同解释。</p>
+</article>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="wrap">
+<div class="ownership">
+<div class="kicker" style="color:#d8e861">06 / Ownership</div>
+<h2>不只交付分析结果，也建立可复用的分析规则与运行基础。</h2>
+<div class="three-col">
+<article class="card">
+<h3>Insight Ownership</h3>
+<p>将订单与顾客数据的断裂定义为分析问题，并区分生命周期指标、顾客群贡献和已完成订单指标。</p>
+</article>
+<article class="card">
+<h3>Execution Ownership</h3>
+<p>完成从源数据确认、粒度设计、身份规则、例外分类、QA 到报告定义的一整套分析流程。</p>
+</article>
+<article class="card">
+<h3>Ownership Boundaries</h3>
+<p>公开版仅展示方法论和合成示例。真实顾客、订单、企业信息、内部规则和经营结果均保持非公开。</p>
+</article>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="footer">
+<div class="wrap">
+<span>Customer Analytics & Data Governance — Public Case Study</span>
+<span>All examples are synthetic and anonymized.</span>
+</div>
+</footer>
+</body>
+</html>

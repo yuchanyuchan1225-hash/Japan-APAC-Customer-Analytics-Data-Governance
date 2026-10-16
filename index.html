@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="日本市場を起点とする APAC 顧客ライフサイクル分析とデータガバナンスの公開ケーススタディ。">
+  <title>Japan APAC Customer Analytics — Case Study</title>
+  <link rel="stylesheet" href="assets/case-study.css">
+  <link rel="stylesheet" href="assets/font-overrides.css">
+</head>
+<body>
+  <header class="topbar">
+<div class="wrap">
+<a class="brand" href="#top">CASE STUDY / 2026</a>
+<nav class="lang" aria-label="Language">
+<a aria-current="page" href="index.html">日本語</a>
+<a href="zh.html">中文</a>
+<a href="en.html">EN</a>
+</nav>
+</div>
+</header>
+  <main id="top">
+    <section class="hero">
+<div class="wrap hero-grid">
+<div>
+<div class="eyebrow">Customer analytics · data governance · lifecycle measurement</div>
+<h1>顧客ライフサイクル分析を、意思決定に耐える定義へ。</h1>
+<p class="lead">注文データを集計するだけでは、初回購入・継続購入・顧客数を正しく把握できない。注文粒度、顧客識別、観測期間、例外処理を先に定義し、分析結果を業務で使える状態へ整えた方法論ケース。</p>
+<div class="notice">
+<strong>公開版について</strong>
+<br>企業名、顧客情報、注文情報は掲載していません。以下の主要指標は、実績を丸めた脱識別値です。増分売上や利益を示すものではありません。</div><div class="metric-strip"><div><b>¥100M+</b><span>分析期間中の成立注文 GMV</span></div><div><b>50x+</b><span>月間 F1 顧客数の拡大</span></div><div><b>15%+</b><span>F2 の平均注文額プレミアム</span></div></div>
+</div>
+<aside class="hero-side">
+<span class="tag">Focus</span>
+<strong>「何を数えるか」を先に確定し、結果の誤読を防ぐ。</strong>
+<p>Customer identity · Order grain · Lifecycle definition · QA controls</p>
+</aside>
+</div>
+</section>
+    <section class="section">
+<div class="wrap">
+<div class="kicker">01 / Business problem</div>
+<h2>集計はできても、比較可能な顧客指標になっていない。</h2>
+<div class="three-col">
+<article class="card">
+<div class="number">01</div>
+<h3>商品行と注文行の混在</h3>
+<p>同一注文に複数の商品行があると、注文金額を商品行のまま合計した時点で二重計上が起こり得る。</p>
+</article>
+<article class="card">
+<div class="number">02</div>
+<h3>顧客 ID の断絶</h3>
+<p>ゲスト購入、会員登録、メールアドレスの揺れが混在すると、同一人物を別の顧客として数える危険がある。</p>
+</article>
+<article class="card">
+<div class="number">03</div>
+<h3>業務例外の誤読</h3>
+<p>取消、社内利用、特典、配送条件を通常購入と同じ扱いにすると、傾向と運用上の例外が混ざる。</p>
+</article>
+</div>
+</div>
+</section>
+    <section class="section">
+<div class="wrap">
+<div class="kicker">02 / Analytical definitions</div>
+<h2>F1 と F2 は、ラベルではなく定義である。</h2>
+<p class="section-intro">F1 は観測期間内の最初の成立注文、F2 は同じ顧客の2回目以降の成立注文として扱う。これは「生涯で初めての購入」を示すものではない。</p>
+<div class="table-wrap">
+<table class="comparison">
+<thead>
+<tr>
+<th>論点</th>
+<th>曖昧な扱い</th>
+<th>公開ケースで採用する扱い</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>初回購入</td>
+<td>過去すべての履歴を持たないまま「新規」と呼ぶ</td>
+<td>観測期間内の初回と明記する</td>
+</tr>
+<tr>
+<td>F1 / F2 の人数</td>
+<td>同じ月に両方へ現れる顧客を単純加算する</td>
+<td>顧客数の合計はユニーク ID で再計算する</td>
+</tr>
+<tr>
+<td>キャンセル注文</td>
+<td>購入回数として F1 / F2 に含める</td>
+<td>成立注文と分離し、必要な場合のみ別の運用指標として扱う</td>
+</tr>
+<tr>
+<td>リピート顧客群</td>
+<td>顧客群の総売上を F2 売上と呼ぶ</td>
+<td>注文レベルの F2 と、顧客群の貢献を別指標にする</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+    <section class="section">
+<div class="wrap">
+<div class="kicker">03 / Data governance</div>
+<h2>分析の前に、データの通り道を整える。</h2>
+<div class="flow">
+<div>
+<span class="tag">01</span>
+<b>原データを確認</b>
+<span>レコード粒度、状態、必須項目、抽出期間を確認する。</span>
+</div>
+<div>
+<span class="tag">02</span>
+<b>注文単位へ正規化</b>
+<span>商品行を注文代表行へ整理し、金額・状態の二重計上を避ける。</span>
+</div>
+<div>
+<span class="tag">03</span>
+<b>本人性を解決</b>
+<span>会員 ID とゲスト情報を、根拠を残して分析用キーへ接続する。</span>
+</div>
+<div>
+<span class="tag">04</span>
+<b>ライフサイクルを付与</b>
+<span>成立注文の時系列だけで F1 / F2 を付ける。</span>
+</div>
+<div>
+<span class="tag">05</span>
+<b>検算と解釈</b>
+<span>集計値を照合し、例外・限界・誤用しやすい表現を明記する。</span>
+</div>
+</div>
+</div>
+</section>
+    <section class="section">
+<div class="wrap">
+<div class="kicker">04 / Synthetic example</div>
+<h2>数字を見せるためではなく、誤った結論を防ぐための比較。</h2>
+<div class="two-col">
+<div class="synthetic">
+<strong>合成例</strong>
+<br>ある月に F1 が 120 人、F2 が 18 人でも、18 人のうち 6 人が同月に初回注文と再注文を行っている場合、月間ユニーク顧客数は 138 人ではなく 132 人になる。F1 と F2 の人数は、用途に応じて重複を処理する必要がある。</div>
+<div class="card">
+<h3>報告で守ること</h3>
+<p>「リピート顧客の売上」と「F2 注文売上」は別物。前者には、その顧客が過去に行った初回注文や取消注文が含まれる場合がある。指標名は計算方法と一致させる。</p>
+</div>
+</div>
+</div>
+</section>
+    <section class="section"><div class="wrap"><div class="kicker">05 / Visual evidence</div><h2>定義が変わると、見える数字も変わる。</h2><div class="evidence-grid"><article class="evidence-card"><h3>注文粒度の検算</h3><p class="micro">合成例：商品行の合計と、注文代表行の合計は同じではない。</p><div class="bar-set"><div class="bar-row"><span>商品行の合計</span><div class="bar-track"><div class="bar-fill warn" style="width:92%"></div></div><b>920</b></div><div class="bar-row"><span>注文代表行</span><div class="bar-track"><div class="bar-fill" style="width:68%"></div></div><b>680</b></div><div class="bar-row"><span>重複リスク</span><div class="bar-track"><div class="bar-fill alt" style="width:24%"></div></div><b>240</b></div></div><div class="callout">注文金額と状態は、注文を代表する1行だけから取得する。</div></article><article class="evidence-card"><h3>本人性の接続</h3><p class="micro">会員 ID だけでは、購入履歴が途中で分断されることがある。</p><div class="identity-map"><div class="identity-node"><strong>ゲスト購入</strong><span>メール・注文情報</span></div><div class="identity-arrow">→</div><div class="identity-node"><strong>分析用キー</strong><span>根拠を残して接続</span></div><div class="identity-arrow">→</div><div class="identity-node"><strong>会員購入</strong><span>会員 ID・注文情報</span></div></div><div class="callout">不確かなレコードを無理に統合しない。例外を残すことが、再計算可能性につながる。</div></article></div><div class="metric-strip"><div><b>F1</b><span>観測期間内の初回成立注文</span></div><div><b>F2</b><span>同一顧客の2回目以降の成立注文</span></div><div><b>QA</b><span>定義・重複・合計を毎回照合</span></div></div></div></section>
+    <section class="section">
+<div class="wrap">
+<div class="kicker">06 / Operational value</div>
+<h2>分析品質を、次の業務判断へつなげる。</h2>
+<div class="three-col">
+<article class="card">
+<h3>CRM の対象設計</h3>
+<p>顧客を一意に扱える前提を整え、会員施策や再購入施策の対象定義を安定させる。</p>
+</article>
+<article class="card">
+<h3>運用例外の管理</h3>
+<p>取消、社内利用、配送条件などを隠さず分離し、異常値と業務ルールを区別する。</p>
+</article>
+<article class="card">
+<h3>説明可能な報告</h3>
+<p>数値の背景、限界、再計算条件を残し、担当者が変わっても同じ解釈へ戻れる状態にする。</p>
+</article>
+</div>
+</div>
+</section>
+    <section class="section">
+<div class="wrap">
+<div class="ownership">
+<div class="kicker" style="color:#d8e861">06 / Ownership</div>
+<h2>分析結果だけでなく、使える定義と運用の土台をつくる。</h2>
+<div class="three-col">
+<article class="card">
+<h3>Insight Ownership</h3>
+<p>注文・顧客データの不連続を分析課題として定義。F1/F2、顧客群、成立注文を混同しない指標体系を設計した。</p>
+</article>
+<article class="card">
+<h3>Execution Ownership</h3>
+<p>データ確認、集計粒度の整理、本人性ルール、例外分類、QA、報告用の定義文書までを一連の分析プロセスとして構築した。</p>
+</article>
+<article class="card">
+<h3>Ownership Boundaries</h3>
+<p>公開版は方法論と合成例のみを収録。実在する顧客、注文、企業、内部運用ルール、実績値は非公開とする。</p>
+</article>
+</div>
+</div>
+</div>
+</section>
+  </main>
+  <footer class="footer">
+<div class="wrap">
+<span>Customer Analytics & Data Governance — Public Case Study</span>
+<span>All examples are synthetic and anonymized.</span>
+</div>
+</footer>
+<script src="assets/ja-copy.js"></script>
+</body>
+</html>
